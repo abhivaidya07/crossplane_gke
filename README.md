@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # What is Crossplane 
 1. Crossplane is an open source Kubernetes add-on that enables platform teams to assemble infrastructure from multiple vendors.
 2. Expose higher level self-service APIs for application teams to consume, without having to write any code.
@@ -83,6 +82,3 @@ kubectl apply -f gke.yaml
 # LINKS:
 
 1. Crossplane official Document: https://crossplane.io/
-=======
->>>>>>> 66734d50007cb17cd17b93217925ca0c91e5cc38
-
