@@ -1,0 +1,51 @@
+apiVersion: container.gcp.crossplane.io/v1beta2
+kind: Cluster
+metadata:
+  name: crossplane-cluster
+spec:
+  forProvider:
+    addonsConfig:
+      networkPolicyConfig:
+        disabled: false
+    network: abhivaidya-common-vpc #change it
+    subnetwork: abhivaidya-subnet #change it
+    location: us-central1-c #change it
+    ipAllocationPolicy:
+      useIpAliases: true
+    masterAuth:
+      clientCertificateConfig:
+        issueClientCertificate: false
+    defaultMaxPodsConstraint:
+       maxPodsPerNode: 110
+    networkPolicy:
+      enabled: false
+    resourceLabels:
+       owner: crossplane
+  providerConfigRef:
+        name: default-gcp
+---
+apiVersion: container.gcp.crossplane.io/v1beta1
+kind: NodePool
+metadata:
+  name: crossplane-np
+spec:
+  forProvider:
+    autoscaling:
+      autoprovisioned: false
+      enabled: false
+    clusterRef:
+      name: crossplane-cluster
+    config:
+      machineType: e2-medium #change if required
+      diskSizeGb: 100 #change if required
+      diskType: pd-standard #change if required
+      imageType: COS_CONTAINERD 
+      labels:
+        owner: crossplane
+    initialNodeCount: 2 #change if required
+    maxPodsConstraint:
+        maxPodsPerNode: 110
+    locations:
+      - "us-central1-c" #change it
+  providerConfigRef:
+         name: default-gcp
