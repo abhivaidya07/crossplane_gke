@@ -82,3 +82,4 @@ kubectl apply -f gke.yaml
 ### LINKS:
 
 1. Crossplane official Document: https://crossplane.io/
+2. Blog : https://dev.to/abhivaidya07/gke-cluster-using-crossplane-3298 
