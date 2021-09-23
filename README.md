@@ -1,9 +1,9 @@
-# What is Crossplane 
+### What is Crossplane 
 1. Crossplane is an open source Kubernetes add-on that enables platform teams to assemble infrastructure from multiple vendors.
 2. Expose higher level self-service APIs for application teams to consume, without having to write any code.
 3. Provisioned and managed by kubectl, GitOps, or any tools that can talk with the Kubernetes API.
 
-# Prerequisites
+### Prerequisites
 For macOS / Linux / Windows use the following:
 - Kubernetes cluster
     - Kind
@@ -11,7 +11,7 @@ For macOS / Linux / Windows use the following:
     - etc.
 - Helm, minimum version v3.0.0+.
 
-# Installing Crossplane
+### Installing Crossplane
 
 1. Create namespace.
 ```
@@ -31,13 +31,13 @@ helm install crossplane --namespace crossplane-system crossplane-stable/crosspla
 helm list -n crossplane-system
 kubectl get all -n crossplane-system
 ``` 
-# Install Crossplane CLI
+### Install Crossplane CLI
 
 1. Install Crossplane CLI using script.
 ```
 curl -sL https://raw.githubusercontent.com/crossplane/crossplane/master/install.sh | sh
 ```
-# Install Provider
+### Install Provider
 
 1. Install GCP provider version 0.18.0 (latest)  using crossplane CLI.
 ```
@@ -49,7 +49,7 @@ kubectl get pkg
 ```
 > NOTE: Wait until it becomes healthy
 
-# Get GCP Account Keyfile
+### Get GCP Account Keyfile
 
 1. Run the script.
 ```
@@ -57,13 +57,13 @@ kubectl get pkg
 ```
 > Note: Change the ***PROJECT_ID*** and ***SA_NAME*** according to usage 
 
-# Create a Provider Secret
+### Create a Provider Secret
 
 1. Use the following command to create kubernetes secret from service account JSON file. 
 ```
 kubectl create secret generic gcp-creds -n crossplane-system --from-file=creds=./creds.json
 ```
-# Configure the Provider
+### Configure the Provider
 
 1. We will create the ProviderConfig object to configure credentials for GCP Provider.
 2. Run the provider.sh script
@@ -72,13 +72,13 @@ kubectl create secret generic gcp-creds -n crossplane-system --from-file=creds=.
 ```
 > Note: Change the ***PROJECT_ID*** according to usage
 
-# Provision Infrastructure
+### Provision Infrastructure
 
 1. Create GKE Cluster
 ```
 kubectl apply -f gke.yaml
 ```
 
-# LINKS:
+### LINKS:
 
 1. Crossplane official Document: https://crossplane.io/
