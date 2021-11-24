@@ -1,5 +1,5 @@
 # replace this with your own gcp project id
-PROJECT_ID=sample-playground
+PROJECT_ID=<project_id>
 echo "apiVersion: gcp.crossplane.io/v1beta1
 kind: ProviderConfig
 metadata:

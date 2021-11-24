@@ -1,0 +1,35 @@
+---
+apiVersion: compute.gcp.crossplane.io/v1beta1
+kind: Network
+metadata:
+  name: crossplane-network
+  labels:
+     service: vpc
+     creation: crossplane
+spec:
+  forProvider:
+    autoCreateSubnetworks: false
+    description: 'This network is created by crossplane'
+    routingConfig:
+      routingMode: REGIONAL
+  providerConfigRef:
+    name: default-gcp
+---
+apiVersion: compute.gcp.crossplane.io/v1beta1
+kind: Subnetwork
+metadata:
+  name: crossplane-subnetwork
+  labels:
+     service: subnetwork
+     creation: crossplane
+spec:
+  forProvider:
+    region: us-central1 #change if required
+    ipCidrRange: "10.2.0.0/16" #change if required
+    privateIpGoogleAccess: true
+    networkSelector:
+      matchLabels:
+       service: vpc 
+       creation: crossplane
+  providerConfigRef:
+    name: default-gcp

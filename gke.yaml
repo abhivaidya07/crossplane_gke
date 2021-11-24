@@ -2,14 +2,23 @@ apiVersion: container.gcp.crossplane.io/v1beta2
 kind: Cluster
 metadata:
   name: crossplane-cluster
+  labels:
+     service: gke
+     creation: crossplane
 spec:
   forProvider:
     addonsConfig:
       networkPolicyConfig:
         disabled: false
-    network: abhivaidya-common-vpc #change it
-    subnetwork: abhivaidya-subnet #change it
-    location: us-central1-c #change it
+    networkSelector:
+       matchLabels:
+           service: vpc 
+           creation: crossplane
+    subnetworkSelector:
+       matchLabels:
+           service: subnetwork
+           creation: crossplane
+    location: us-central1-c #change if required
     ipAllocationPolicy:
       useIpAliases: true
     masterAuth:
@@ -33,8 +42,10 @@ spec:
     autoscaling:
       autoprovisioned: false
       enabled: false
-    clusterRef:
-      name: crossplane-cluster
+    clusterSelector:
+      matchLabels:
+        service: gke
+        creation: crossplane
     config:
       machineType: e2-medium #change if required
       diskSizeGb: 100 #change if required
@@ -46,6 +57,6 @@ spec:
     maxPodsConstraint:
         maxPodsPerNode: 110
     locations:
-      - "us-central1-c" #change it
+      - "us-central1-c" #change if required
   providerConfigRef:
          name: default-gcp
