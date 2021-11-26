@@ -74,12 +74,20 @@ kubectl create secret generic gcp-creds -n crossplane-system --from-file=creds=.
 
 ### Provision Infrastructure
 
-1. Create GKE Cluster
+1. Create VPC Network
 ```
-kubectl apply -f gke.yaml
+kubectl apply -f network.yaml
+```
+2. Create subnetwork
+```
+kubectl apply -f subnetwork.yaml
+```
+4. Create GKE Cluster
+```
+kubectl apply -f cluster.yaml
+kubectl apply -f nodepool.yaml
 ```
 
 ### LINKS:
 
 1. Crossplane official Document: https://crossplane.io/
-2. Blog : https://dev.to/abhivaidya07/gke-cluster-using-crossplane-3298 
